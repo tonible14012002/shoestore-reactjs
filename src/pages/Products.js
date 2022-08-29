@@ -1,6 +1,6 @@
 
 import Banner from "./components/Banner"
-import FilterBar from "./components/Filters"
+import Filter from "./components/Filters"
 import Header from "./components/Header"
 import ProductList from "./components/ProductList"
 
@@ -15,9 +15,10 @@ const ProductPage = (props)  => {
                 </div>
 
                 <div className="content w-full pl-4 pr-4 pb-16 tablet:pl-20 tablet:pr-20">
-                    <FilterBar />
+                    <Filter />
                     <ProductList />
-                </div>                
+                </div>
+
             </div>
 
         </>
