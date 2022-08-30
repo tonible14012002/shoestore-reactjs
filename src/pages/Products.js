@@ -1,8 +1,8 @@
-
 import Banner from "./components/Banner"
-import Filter from "./components/Filters"
+import Filter from "./components/Filter"
 import Header from "./components/Header"
-import ProductList from "./components/ProductList"
+import ProductList from "./components/ProductGallery"
+
 
 const ProductPage = (props)  => {
 
@@ -18,11 +18,9 @@ const ProductPage = (props)  => {
                     <Filter />
                     <ProductList />
                 </div>
-
             </div>
-
         </>
     )
-}
+}   
 
 export default ProductPage

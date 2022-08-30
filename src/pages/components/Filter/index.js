@@ -1,12 +1,12 @@
-import Button from "./Button"
+import Button from "../../../components/Button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilter, faX, faCheck} from "@fortawesome/free-solid-svg-icons"
-import useSmallSreen from '../../hooks/useSmallScreen'
+import useSmallSreen from '../../../hooks/useSmallScreen'
 import ReactDOM from "react-dom";
 import { useEffect, useRef, useState } from "react"
-import useModal from "../../hooks/useModal";
-import {getCatgories, getAttributeClasses } from "../../services/filterService";
-import { Formik, Form, Field } from "formik";
+import useModal from "../../../hooks/useModal";
+import {getCatgories, getAttributeClasses } from "../../../services/filterService";
+import { Formik, Form, Field, useField } from "formik";
 
 const Filter = () => {
 
@@ -32,11 +32,8 @@ const Filter = () => {
 
     return (
         <Formik
-            initialValues={{
-                category: []
-            }}
             onSubmit={(values) => {alert(JSON.stringify(values))}}
-
+            initialValues={{}}
         >
             <Form className="pl-3 pr-3 sticky top-0 bg-white mb-8">
                 <div className="w-full h-[70px] flex items-center">
@@ -69,7 +66,6 @@ const Filter = () => {
                     </div>
                     <Button className="transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
                             cursor-pointer text-white hover:bg-blue-400 rounded-3xl mr-2 bg-blue-300" 
-                            type="button"
                     >
                         <FontAwesomeIcon icon={faCheck} />
                     </Button>
@@ -226,30 +222,24 @@ const FilterChoiceSkeleton = () => {
     )
 }
 
-const FilterChoice = ({
-    primary,
-    label,
-    name, 
-    value,
-    ...props
-}) => {
+const FilterChoice = ({primary, label, name, value, ...props}) => {
 
-    const [isChecked, setIsChecked] = useState(false)
+    const [fields, meta] = useField(name)
+
     const style = primary? `transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 cursor-pointer
-                    ${isChecked ? "bg-blue-400 text-white":"bg-gray-200 hover:bg-gray-300"} rounded-3xl`
-                    :`${isChecked ? "bg-blue-400 text-white":"bg-gray-200 hover:bg-gray-300"} 
-                    transition-all pl-3 text-lg tablet:text-sm pr-3 pt-1 pb-1 border rounded-2xl cursor-pointer`
-    
-
+                    ${fields.value?.includes(value) ? "bg-blue-400 text-white":"bg-gray-200 hover:bg-gray-300"} rounded-3xl`
+                :`${fields.value?.includes(value)? "bg-blue-400 text-white":"bg-gray-200 hover:bg-gray-300"} 
+                transition-all pl-3 text-lg tablet:text-sm pr-3 pt-1 pb-1 border rounded-2xl cursor-pointer`
+    console.log(fields.value)
     return (
         <label className={style}
         >   
             {label || "Checkbox"}
-            <Field type="checkbox" className="hidden"
+            <input type="checkbox" className="hidden"
+                {...fields}
                 name={name}
                 value={value}
                 {...props}
-                onClick={(e) => {setIsChecked(e.target.checked)}}
             />
        </label>    
     )

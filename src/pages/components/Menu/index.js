@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { faBars, faX } from "@fortawesome/free-solid-svg-icons"
-import Button from "./Button"
+import Button from "../../../components/Button"
 import ReactDOM from "react-dom";
-import useModalDropdown from "../../hooks/useModalDropdown";
+import useModalDropdown from "../../../hooks/useModalDropdown";
 
 
 const Menu = () => {
@@ -35,8 +35,6 @@ const Menu = () => {
         
     </>)
 }
-
-export default Menu
 
 const SideBar = ({coors, onClose , ...props}) => {
 
@@ -72,3 +70,5 @@ const SideBar = ({coors, onClose , ...props}) => {
         </div>
     ,document.querySelector("body"))
 }
+
+export default Menu

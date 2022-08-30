@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import Button from './Button'
-import getProducts from "../../services/productService"
+import Button from '../../../components/Button'
+import getProducts from "../../../services/productService"
 
 
 const ProductList = () => {

@@ -1,7 +1,7 @@
-import Button from "./Button"
+import Button from "../../../components/Button"
 import { useEffect, useRef } from "react"
-import useHover from "../../hooks/useHover"
-import Menu from './Menu'
+import useHover from "../../../hooks/useHover"
+import Menu from '../Menu'
 
 
 const Header = () => {
