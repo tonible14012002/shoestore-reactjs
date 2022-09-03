@@ -55,8 +55,8 @@ const ProductList = () => {
                             <ProductItem key={item.id} 
                                 backgroundColor={item.color_code}
                                 name={item.name}
-                                price={"0"}
-                                image={item.media?.images[0].image|| "https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-1/301733153_3354400938158089_1225829056958232880_n.jpg?stp=dst-jpg_p240x240&_nc_cat=108&ccb=1-7&_nc_sid=7206a8&_nc_ohc=-u0EciNGfGYAX-pgiWg&_nc_ht=scontent.fhan2-3.fna&oh=00_AT9MEZQs0GFgqUqQdxzCXoIW1EnTD5thfbdEKK4cE54UXA&oe=6312D8CF"}
+                                priceRange={item.price_range}
+                                images={item.media?.images}
                                 color={item.color?.name || ""}
                             />
                         )
