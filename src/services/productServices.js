@@ -94,7 +94,6 @@ const getAttributeClasses = () => {
 }
 
 const filterProducts = (categories="", attributes="", priceRange="") => {
-    console.log(categories, attributes, priceRange)
     return axios.get(`http://127.0.0.1:8000/shop/product-list/?category=${categories}&attribute=${attributes}&range=${priceRange}`)
     .then(resp => resp.data)
 }

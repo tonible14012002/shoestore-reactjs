@@ -29,6 +29,7 @@ const Filter = ({setNewQuery}) => {
         getCate()
     }, [])
 
+
     const {
         show,
         handleClick, 
@@ -66,17 +67,10 @@ const Filter = ({setNewQuery}) => {
         })
     }
 
-    return (
-        <Formik
-            onSubmit={(values) => {
-                handleSubmit(values)
-            }}
-            initialValues={{
-                from: "",
-                to: ""
-                // others
-            }}
-            validationSchema={Yup.object({
+    var initValues={from:"", to: ""}
+    filterOptions.current?.forEach(op => initValues[op.name]= [])
+
+    const validationSchema = Yup.object({
                 from: Yup.number()
                     .typeError("only numbers are allowed")
                     .nullable()
@@ -88,18 +82,20 @@ const Filter = ({setNewQuery}) => {
                             is: (from)=>from,
                             then: Yup.number().min(Yup.ref("from"))
                         })
-            })}
+            })
+
+
+    return (
+        <Formik
+            onSubmit={handleSubmit}
+            initialValues={initValues}
+            validationSchema={validationSchema}
         >
-        {({
-            errors,
-            handleSubmit,
-            resetForm
-        }) => {
-            const hasError = Object.keys(errors).length !== 0
-            console.log(hasError)
+        {(formikProps) => {
+            const hasError = Object.keys(formikProps.errors).length !== 0
             return (
             <form className="pl-3 pr-3 sticky z-30 top-0 bg-white mb-8"
-                onSubmit={handleSubmit}
+                onSubmit={formikProps.handleSubmit}
             >
                 <div className="w-full h-[70px] flex items-center">
                     <div className="w-full h-full overflow-x-auto flex gap-3 items-center mr-4">
@@ -113,7 +109,7 @@ const Filter = ({setNewQuery}) => {
                             <Button className="`transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
                                 cursor-pointer bg-pink-300 hover:bg-pink-400 text-white rounded-3xl flex gap-1 items-center"
                                 type="button"
-                                onClick={() => {resetForm(); handleSubmit()}}
+                                onClick={() => {formikProps.resetForm(); formikProps.handleSubmit()}}
                             >
                                 <span>All</span><FontAwesomeIcon icon={faFilterCircleXmark} />
                             </Button>
@@ -148,12 +144,15 @@ const Filter = ({setNewQuery}) => {
 
                 {show && !isLoading &&
                 (isMobile? <FilterMenuMobile 
-                            handleSubmit={handleSubmit}
-                            handleClose={handleClose} 
+                            onSubmit={handleSubmit}
+                            handleClose={handleClose}
                             categories={categories.current}
                             options={filterOptions.current} 
+                            validationRule={validationSchema}
+                            initialValues={formikProps.values}
+                            setValues={formikProps.setValues}
                         />
-                        : <FilterMenuLaptop
+                        :<FilterMenuLaptop
                             handleClose={handleClose} 
                             options={filterOptions.current} 
                         />)}

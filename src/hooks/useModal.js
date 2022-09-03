@@ -9,7 +9,7 @@ const useModal = () => {
         setShow(prev => !prev)
     }
     const handleClose = (e) => {
-        e.preventDefault()
+        e?.preventDefault()
         setShow(false)
     }
     return {show, handleClick, handleClose}
