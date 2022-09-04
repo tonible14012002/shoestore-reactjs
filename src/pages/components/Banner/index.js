@@ -88,7 +88,7 @@ const Banner = () => {
                         <FontAwesomeIcon icon={faArrowRight} />
                     </Button>
 
-                    <div className="absolute top-0 h-full grid transition-all duration-500"
+                    <div className="absolute z-0 top-0 h-full grid transition-all duration-500"
                         style={{
                             gridTemplateColumns: `repeat(${bannerDataRef.current.length}, 1fr)`,
                             width: `${bannerDataRef.current.length * 100}%`,

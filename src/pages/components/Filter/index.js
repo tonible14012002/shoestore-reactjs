@@ -29,7 +29,6 @@ const Filter = ({setNewQuery}) => {
         getCate()
     }, [])
 
-
     const {
         show,
         handleClick, 
@@ -67,7 +66,7 @@ const Filter = ({setNewQuery}) => {
         })
     }
 
-    var initValues={from:"", to: ""}
+    var initValues={from:"", to: "", category: [    ]}
     filterOptions.current?.forEach(op => initValues[op.name]= [])
 
     const validationSchema = Yup.object({
@@ -93,70 +92,73 @@ const Filter = ({setNewQuery}) => {
         >
         {(formikProps) => {
             const hasError = Object.keys(formikProps.errors).length !== 0
+            const formChanged = JSON.stringify(formikProps.values) !== JSON.stringify(formikProps.initialValues)
             return (
-            <form className="pl-3 pr-3 sticky z-30 top-0 bg-white mb-8"
-                onSubmit={formikProps.handleSubmit}
-            >
-                <div className="w-full h-[70px] flex items-center">
-                    <div className="w-full h-full overflow-x-auto flex gap-3 items-center mr-4">
-                        {isLoading && <>
-                            <FilterChoiceSkeleton /> 
-                            <FilterChoiceSkeleton />
-                            <FilterChoiceSkeleton />
-                        </>}
-                        {!isLoading && 
-                        <>
-                            <Button className="`transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
-                                cursor-pointer bg-pink-300 hover:bg-pink-400 text-white rounded-3xl flex gap-1 items-center"
-                                type="button"
-                                onClick={() => {formikProps.resetForm(); formikProps.handleSubmit()}}
-                            >
-                                <span>All</span><FontAwesomeIcon icon={faFilterCircleXmark} />
-                            </Button>
-                            {categories.current.map((item, index) => (
-                            <FilterChoice
-                                primary
-                                key={item.id}
-                                label={item.name}
-                                type="checkbox"
-                                name="category"
-                                value={item.name}
-                            />
-                        ))}
-                        </>}
+                <form className="pl-3 pr-3 sticky z-30 top-0 bg-white mb-8"
+                    onSubmit={formikProps.handleSubmit}
+                >
+                    <div className="w-full h-[70px] flex items-center">
+                        <div className="w-full h-full overflow-x-auto flex gap-3 items-center mr-4">
+                            {isLoading && <>
+                                <FilterChoiceSkeleton /> 
+                                <FilterChoiceSkeleton />
+                            </>}
+                            {!isLoading && 
+                            <>
+                                <Button className="`transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
+                                    cursor-pointer bg-pink-300 hover:bg-pink-400 text-white rounded-3xl flex gap-1 items-center"
+                                    type="button"
+                                    onClick={() => {formikProps.resetForm(); formikProps.handleSubmit()}}
+                                >
+                                    <span>All</span><FontAwesomeIcon icon={faFilterCircleXmark} />
+                                </Button>
+                                {!isMobile && categories.current.map((item, index) => (
+                                <FilterChoice
+                                    primary
+                                    key={item.id}
+                                    label={item.name}
+                                    type="checkbox"
+                                    name="category"
+                                    value={item.name}
+                                />
+                            ))}
+                            </>}
+                        </div>
+                        <Button className={`transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
+                                cursor-pointer text-white rounded-3xl mr-2 
+                                ${hasError?"bg-red-400 hover:bg-red-500"
+                                :formChanged? "bg-blue-400 hover:bg-blue-500"
+                                :"bg-gray-400"}`}
+                                type="submit"
+                        >   
+                            {hasError?
+                            <FontAwesomeIcon icon={faExclamation} />
+                            :<FontAwesomeIcon icon={faCheck} />}
+                        </Button>
+                        {!isLoading &&
+                        <Button className={`w-[50px] h-[50px] ${show&&"rotate-[10deg]"} ${hasError?"text-red-400":"text-blue-400"}`}
+                            type="button"
+                            onClick={handleClick}
+                        >
+                            <FontAwesomeIcon icon={faFilter}/>
+                        </Button>}
                     </div>
-                    <Button className={`transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
-                            cursor-pointer text-white rounded-3xl mr-2 ${hasError?"bg-red-400 hover:bg-red-500":"bg-blue-400 hover:bg-blue-500"}`}
-                            type="submit"
-                    >   
-                        {hasError?
-                        <FontAwesomeIcon icon={faExclamation} />
-                        :<FontAwesomeIcon icon={faCheck} />}
-                    </Button>
-                    {!isLoading &&
-                    <Button className={`w-[50px] h-[50px] ${show&&"rotate-[10deg]"} ${hasError?"text-red-400":"text-blue-400"}`}
-                        type="button"
-                        onClick={handleClick}
-                    >
-                        <FontAwesomeIcon icon={faFilter}/>
-                    </Button>}
-                </div>
 
-                {show && !isLoading &&
-                (isMobile? <FilterMenuMobile 
-                            onSubmit={handleSubmit}
-                            handleClose={handleClose}
-                            categories={categories.current}
-                            options={filterOptions.current} 
-                            validationRule={validationSchema}
-                            initialValues={formikProps.values}
-                            setValues={formikProps.setValues}
-                        />
-                        :<FilterMenuLaptop
-                            handleClose={handleClose} 
-                            options={filterOptions.current} 
-                        />)}
-            </form>
+                    {show && !isLoading &&
+                    (isMobile? <FilterMenuMobile 
+                                onSubmit={handleSubmit}
+                                handleClose={handleClose}
+                                categories={categories.current}
+                                options={filterOptions.current} 
+                                validationRule={validationSchema}
+                                initialValues={formikProps.values}
+                                setValues={formikProps.setValues}
+                            />
+                            :<FilterMenuLaptop
+                                handleClose={handleClose} 
+                                options={filterOptions.current} 
+                            />)}
+                </form>
             )
         }}
         </Formik>

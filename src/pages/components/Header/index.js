@@ -1,36 +1,13 @@
 import Button from "../../../components/Button"
-import { useEffect, useRef } from "react"
-import useHover from "../../../hooks/useHover"
 import Menu from '../Menu'
+import Search from "./components/Search"
 
 
 const Header = () => {
 
-    const headRef = useRef()
-    // auto hidden when scroll
-    useEffect(() => {
-        if (!headRef.current) return
-        const handleFixedHeader = (e) => {
-            if (window.oldScrollY < window.scrollY && window.scrollY >= 70 ) {
-               headRef.current.style.transform = 'translateY(-100%)'
-            }
-            else {
-                
-                headRef.current.style.transform = 'translateY(0)'
-            }
-            window.oldScrollY = window.scrollY
-        }
-
-        window.addEventListener('scroll', handleFixedHeader)
-
-        return () => {
-            window.removeEventListener('scroll', handleFixedHeader)
-        }
-    }, [])
 
     return (
         <div className="header-wrapper mb-10 w-full h-[70px] transition-all bg-white shadow-sm"
-            ref={headRef}
         >
             <div className="header grid grid-cols-3 pl-5 pr-5 w-full h-full 
                             tablet:pl-20 tablet:pr-20 ">
@@ -104,24 +81,5 @@ const Header = () => {
 }
 
 
-const Search = () => {
-
-    const [inputHovered, inputRef] = useHover()
-    
-    return (
-        <label htmlFor="search" 
-            className={`hidden laptop:flex items-center pl-4 pr-4 pt-2 pb-2 bg-gray-200 
-            rounded-2xl cursor-pointer transition-all ${inputHovered && "bg-gray-200"}`}
-            ref={inputRef}
-        >   
-        <svg className="" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0.264969 16.395L4.45396 11.939C3.37303 10.6223 2.78367 8.97062 2.78694 7.26704C2.81824 5.86812 3.26168 4.50953 4.06169 3.36152C4.86171 2.21351 5.98273 1.32713 7.28429 0.813425C8.58584 0.299721 10.0101 0.181546 11.3785 0.473704C12.7469 0.765861 13.9987 1.45537 14.977 2.45582C15.9553 3.45627 16.6166 4.72316 16.878 6.09779C17.1394 7.47241 16.9894 8.89363 16.4467 10.1834C15.9039 11.4731 14.9926 12.5739 13.827 13.348C12.6614 14.1221 11.2932 14.535 9.89397 14.535C8.43174 14.5372 7.0063 14.0766 5.82195 13.219L1.60097 17.708C1.51761 17.7975 1.41709 17.8693 1.30544 17.9193C1.19378 17.9692 1.07326 17.9961 0.950974 17.9985C0.828692 18.001 0.707162 17.9788 0.593613 17.9334C0.480064 17.8879 0.376805 17.8201 0.289963 17.734C0.113332 17.5574 0.0120327 17.3192 0.00737047 17.0695C0.00270824 16.8198 0.0950526 16.5781 0.264969 16.395ZM9.89397 1.89503C8.82646 1.87118 7.77604 2.16589 6.87679 2.74165C5.97753 3.3174 5.27021 4.14807 4.84511 5.12757C4.42001 6.10708 4.29642 7.19103 4.49007 8.2411C4.68372 9.29117 5.18583 10.2597 5.93236 11.0231C6.67889 11.7866 7.63594 12.3103 8.68141 12.5274C9.72688 12.7445 10.8134 12.6453 11.8021 12.2422C12.7909 11.8391 13.6372 11.1506 14.2329 10.2645C14.8287 9.37834 15.1469 8.33481 15.147 7.26704C15.1598 5.85959 14.6142 4.5044 13.6298 3.49842C12.6454 2.49245 11.3023 1.91771 9.89494 1.90003L9.89397 1.89503Z" fill="#677585"/>
-        </svg>
-            <input className="outline-none bg-transparent ml-2"
-                id="search"
-            />
-        </label>
-    )
-}
 
 export default Header
