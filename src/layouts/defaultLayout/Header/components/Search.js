@@ -13,7 +13,7 @@ const Search = () => {
     const resultRef = useRef()
     const debouncedValue = useDebounced(value, 200)
 
-    const [isClickedInside, searchRef] = useClickInside()
+    const {isClickedInside, containerRef:searchRef} = useClickInside()
 
     useEffect(() => {
         const search = async () => {
@@ -47,6 +47,7 @@ const Search = () => {
                     onChange={handleChange}
                     id="search"
                 />
+                {console.log(isClickedInside, searchRef)}
             </label>
             {value && isClickedInside && 
             <SearchResult 

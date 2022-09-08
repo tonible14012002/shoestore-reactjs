@@ -18,10 +18,11 @@ const useClickInside = () => {
 
     useEffect(() => {
         document.addEventListener("click", handleDocumentClick.current)
-        return () => document.removeEventListener("click", handleDocumentClick.current)
+        const toRemove = handleDocumentClick.current
+        return () => document.removeEventListener("click", toRemove)
     }, [])
 
-    return [isClickedInside, containerRef]
+    return {isClickedInside, containerRef, setIsClickedInside}
 }
 
 export default  useClickInside

@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import FilterCategories from "./FilterCategories"
 import FilterGroup from "./FilterGroup"
 import { Formik, Field } from "formik"
-import Button from "../../../components/Button"
+import Button from "../../../../components/Button"
 import ReactDOM from "react-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faX, faReply, faCheck, faExclamation} from '@fortawesome/free-solid-svg-icons'

@@ -1,5 +1,5 @@
-import Button from "../../../components/Button"
-import useHover from "../../../hooks/useHover"
+import Button from "../../../../components/Button"
+import useHover from "../../../../hooks/useHover"
 
 const ProductItem = ({name, images, backgroundColor, priceRange , color, ...props}) => {
     const [isHovered, imgRef] = useHover()

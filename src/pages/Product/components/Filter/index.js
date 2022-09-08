@@ -1,10 +1,10 @@
-import Button from "../../../components/Button"
+import Button from "../../../../components/Button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFilter, faCheck, faFilterCircleXmark, faExclamation, } from "@fortawesome/free-solid-svg-icons"
-import useSmallSreen from '../../../hooks/useSmallScreen'
+import useSmallSreen from "../../../../hooks/useSmallScreen"
 import { useEffect, useRef, useState } from "react"
-import useModal from "../../../hooks/useModal";
-import * as productServices from "../../../services/productServices";
+import useModal from "../../../../hooks/useModal";
+import * as productServices from "../../../../services/productServices";
 import { Formik, ErrorMessage, Field} from "formik";
 import FilterGroup from "./FilterGroup"
 import FilterChoiceSkeleton from "./FilterChoiceSkeleton"

@@ -1,7 +1,6 @@
 import Button from "../../../components/Button"
-import Menu from '../Menu'
 import Search from "./components/Search"
-
+import Menu from "../Menu"
 
 const Header = () => {
 
