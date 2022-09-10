@@ -1,5 +1,6 @@
 import Header from "./Header"
 import MiniCart from "./MiniCart"
+import Footer from "./Footer"
 
 const DefaultLayout = ({children}) => {
 
@@ -16,6 +17,7 @@ const DefaultLayout = ({children}) => {
                     <MiniCart />
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

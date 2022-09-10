@@ -49,15 +49,15 @@ const SideBar = ({coors, onClose , ...props}) => {
             }}
         >
             <ul className="p-0 m-0 w-full h-full overflow-hidden rounded-2xl flex flex-col">
-                <li className="cursor-pointer hover:bg-gray-50 text-start pl-6 pt-3 pb-3 bg" >
+                <li className="cursor-pointer hover:bg-gray-50 text-start pl-6 pt-3 pb-3" >
                     <Button>Terms and Policies</Button>
                 </li>
 
-                <li className="cursor-pointer hover:bg-gray-50 text-start pl-6 pt-3 pb-3 bg border-t " >
-                    <Button>Blogs</Button>
+                <li className="cursor-pointer hover:bg-gray-50 text-start pl-6 pt-3 pb-3 border-t " >
+                    <Button to={{pathname: "/product-list", state: {modal:true}}}>Shop</Button>
                 </li>
 
-                <li className="cursor-pointer hover:bg-gray-50 text-start pl-6 pt-3 pb-3 bg border-t" >
+                <li className="cursor-pointer hover:bg-gray-50 text-start pl-6 pt-3 pb-3 border-t" >
                     <Button>Contact</Button>
                 </li>
 

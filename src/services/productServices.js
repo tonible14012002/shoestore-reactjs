@@ -107,5 +107,9 @@ const searchProduct = (q) => {
     .then(resp => resp.data)
 }
 
+const retrieveProduct = (id) => {
+    return axios.get(`http://127.0.0.1:8000/shop/product-list/${id}/`)
+    .then(resp => resp.data)
+}
 
-export {getCatgories, getAttributeClasses, filterProducts, searchProduct}
+export {getCatgories, getAttributeClasses, filterProducts, searchProduct, retrieveProduct}

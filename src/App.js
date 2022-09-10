@@ -7,7 +7,6 @@ function App() {
 
   return (
       <Router>
-        <div>
           <Routes>
             {publicRoutes.map((route, index) => {
               const Page = route.component
@@ -30,7 +29,7 @@ function App() {
               )
             })}
           </Routes>
-        </div>
+
       </Router>
   );
 }

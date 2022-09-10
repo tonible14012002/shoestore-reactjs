@@ -1,6 +1,6 @@
 import './GlobalStyles.scss'
 
-function GlobalStyle ({children, ...props}) {
+function GlobalStyle ({children}) {
     return children
 }
 

@@ -1,7 +1,7 @@
 import Button from "../../../../components/Button"
 import useHover from "../../../../hooks/useHover"
 
-const ProductItem = ({name, images, backgroundColor, priceRange , color, ...props}) => {
+const ProductItem = ({id, name, images, backgroundColor, priceRange , color, ...props}) => {
     const [isHovered, imgRef] = useHover()
 
     return (
@@ -20,8 +20,10 @@ const ProductItem = ({name, images, backgroundColor, priceRange , color, ...prop
             >
                 {color || "White"}
             </span>
-            <Button className="pl-3 pr-3 pt-2 pb-2 rounded-3xl text-lg bg-gray-200 hover:bg-gray-300"
-            >Buy now
+            <Button className="pl-3 pr-3 pt-2 pb-2 rounded-3xl text-lg bg-gray-200 hover:bg-gray-300 text-center"
+                to={`/product-detail/${id}`}
+            >
+                Buy now
             </Button>
         </div>
     )

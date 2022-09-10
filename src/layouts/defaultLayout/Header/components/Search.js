@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import { searchProduct } from "../../../../services/productServices"
 import useDebounced from "../../../../hooks/useDebounced"
 import useClickInside from "../../../../hooks/useClickInside"
+import Button from "../../../../components/Button"
 
 const Search = () => {
 
@@ -86,7 +87,7 @@ const SearchResult = ({
                 {items.map(item => (
                     <SearchItem 
                         name={item.name}
-                        link="/"
+                        link={`/product-detail/${item.id}`}
                         image={item.media.images[0].image}
                     />
                 ))}
@@ -103,12 +104,14 @@ const SearchItem = ({
 }) => {
     return (
         <li className="text-sm w-full">
-            <a href={link} className="w-full flex items-center text-gray-500 no-underline hover:text-gray-700">
+            <Button href={link} className="w-full flex items-center text-gray-500 no-underline hover:text-gray-700"
+                to={link}
+            >
                 <div className="w-[40px] h-[40px]">
                     <img className="w-full object-cover rounded" src={image} alt="result"></img>
                 </div>
                 <span className="pl-3 overflow-hidden w-full text-ellipsis whitespace-nowrap">{name}</span>            
-            </a>
+            </Button>
         </li>        
     )
 

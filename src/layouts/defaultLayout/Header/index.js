@@ -4,9 +4,8 @@ import Menu from "../Menu"
 
 const Header = () => {
 
-
     return (
-        <div className="header-wrapper mb-10 w-full h-[70px] transition-all bg-white shadow-sm"
+        <div className="header-wrapper mb-5 laptop:mb-7 w-full h-[70px] transition-all bg-white shadow-sm"
         >
             <div className="header grid grid-cols-3 pl-5 pr-5 w-full h-full 
                             tablet:pl-20 tablet:pr-20 ">

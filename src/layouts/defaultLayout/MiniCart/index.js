@@ -18,7 +18,6 @@ const MiniCart = () => {
             cartDataRef.current = await getCart()
             setLoading(false)
         }
-        console.log('re fetch')
         getCartData()
     }, [fetch])
 
@@ -26,6 +25,8 @@ const MiniCart = () => {
         setFetch({})
         setShow(prev => !prev)
     }
+
+    console.log(cartDataRef.current)
 
     return ReactDOM.createPortal(
         <div className={`transition-all hidden laptop:block fixed z-50 right-0 top-1/2 -translate-y-[100px] translate-x-[100%]

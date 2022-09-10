@@ -50,7 +50,7 @@ const Filter = ({setNewQuery}) => {
                             && values[key].length 
                             && key !== "category")
                             )
-        const attrQuery= attrClasses
+        const attrQuery = attrClasses
                         .map(key => values[key].join(','))
                         .join('^')     
 

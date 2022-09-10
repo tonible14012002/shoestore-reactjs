@@ -54,12 +54,14 @@ const Product = () => {
                     {!loading && 
                     productListRef.current.map((item, index) => {
                         return (
-                            <ProductItem key={item.id} 
+                            <ProductItem 
+                                key={item.id} 
                                 backgroundColor={item.color_code}
                                 name={item.name}
                                 priceRange={item.price_range}
                                 images={item.media?.images}
                                 color={item.color?.name || ""}
+                                id={item.id}
                             />
                         )
                     })
