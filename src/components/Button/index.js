@@ -2,8 +2,6 @@ import { Link } from "react-router-dom"
 
 const Button = ({
     children,
-    leftIcon, 
-    rightIcon,
     className, 
     onClick, 
     href, 
@@ -13,7 +11,7 @@ const Button = ({
 }) => {
 
     var Com = 'button'
-    const props = {onClick, ...passProps}
+    const props = {onClick, className, disabled, ...passProps}
 
     // clear listener if disabled
     if (disabled) {
@@ -31,9 +29,12 @@ const Button = ({
         Com = 'a'
     }
 
+    if (disabled) {
+        console.log("disabled button")
+    }
 
     return (
-        <Com className={className} 
+        <Com
             {...props}
         >
             {children}

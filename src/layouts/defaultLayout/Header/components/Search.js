@@ -48,7 +48,6 @@ const Search = () => {
                     onChange={handleChange}
                     id="search"
                 />
-                {console.log(isClickedInside, searchRef)}
             </label>
             {value && isClickedInside && 
             <SearchResult 

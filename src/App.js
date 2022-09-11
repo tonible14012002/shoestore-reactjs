@@ -2,10 +2,14 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { publicRoutes } from './routers';
 import DefaultLayout from  './layouts/defaultLayout'
 import { Fragment } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { CartProvider } from './cart';
 
 function App() {
 
   return (
+    <CartProvider>
       <Router>
           <Routes>
             {publicRoutes.map((route, index) => {
@@ -29,8 +33,9 @@ function App() {
               )
             })}
           </Routes>
-
       </Router>
+      <ToastContainer />
+    </CartProvider>
   );
 }
 

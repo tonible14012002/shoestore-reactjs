@@ -5,6 +5,11 @@ import { useState } from "react"
 import FormikCheckBox from "../../../../components/FormikCheckBox"
 import * as Yup from "yup"
 import { addToCart } from "../../../../services/cartService"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSpinner } from "@fortawesome/free-solid-svg-icons"
+import {toast } from "react-toastify"
+import { useContext } from "react"
+import { CartContext } from "../../../../cart"
 
 const ProductForm = ({product}) => {
     return (
@@ -50,7 +55,8 @@ const Form = ({options, productId, genericProduct}) => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const optionTabs = ['size', 'quantity']
     const [isActiveTab, setIsActiveTab] = useState(0)
-
+    const [price, setPrice] = useState("Choose your size")
+    const [cartData, setCartData] = useContext(CartContext)
     const handleSizeBtnClick = () => {
         setIsActiveTab(0)
     }
@@ -60,17 +66,26 @@ const Form = ({options, productId, genericProduct}) => {
 
     const quanityList = [...Array(15).keys()].map(i => i + 1)
     const handleFormikSubmit = (values) => {
-        console.log(values)
+
         const submitForm = async () => {
             setIsSubmitting(true)
             const result = await addToCart(values)
+
+            if (result.status === "error") {
+                toast.error(result.error,{
+                    position: toast.POSITION.TOP_RIGHT
+                })
+            } else {
+                toast.success("Product was added to cart",{
+                    position: toast.POSITION.TOP_RIGHT
+                })
+                setCartData(result.data)
+            }
+
             setIsSubmitting(false)
-            console.log(result)
         }
         submitForm()
-        alert("submitted")
     }
-
 
     return (
     <Formik 
@@ -135,6 +150,7 @@ const Form = ({options, productId, genericProduct}) => {
                         <ul className="w-[80%] m-0 p-0 flex flex-wrap gap-5  ">
                             {options.map(option => (
                                 <FormikCheckBox
+                                    key={option.id}
                                     label={option.size.size} 
                                     name="option_id" 
                                     value={String(option.id)} 
@@ -143,6 +159,7 @@ const Form = ({options, productId, genericProduct}) => {
                                     onClick={() => {
                                         if (formikProps.values.option_id !== String(option.id)) {
                                             formikProps.setFieldValue("quantity", "", true)
+                                            setPrice(option.price)
                                         }
                                     }}
                                 />
@@ -155,6 +172,7 @@ const Form = ({options, productId, genericProduct}) => {
                                 const isOutOfStock = item > (options.find(op => String(op.id) === formikProps.values.option_id)?.stock || 0)
                                 return (
                                     <FormikCheckBox 
+                                        key={item}
                                         label={item} 
                                         name="quantity" 
                                         value={String(item)} 
@@ -169,16 +187,28 @@ const Form = ({options, productId, genericProduct}) => {
                         {formikProps.errors.quantity}
                     </span>
                 </div>
+
+                <div className="mb-5 flex justify-between items-baseline">
+                    <span className="text-gray-500 font-semibold block">price:</span>
+                    <span className="text-xl text-red-400 font-semibold">{price}</span>
+                </div>
                 
                 <div className="grid grid-cols-2 gap-3">
                     <Button className="p-3 hover:shadow-md bg-black rounded-xl text-white font-semibold"
                         type="submit"
+                        disabled={isSubmitting}
                     >   
-                        Add to cart
+                        {isSubmitting ?
+                            <FontAwesomeIcon className=" animate-spin" icon={faSpinner} />
+                        :"Add to cart"}
                     </Button>
 
-                    <Button className="p-3 hover:shadow-md bg-white border-2 border-black rounded-xl font-semibold">
-                        Checkout
+                    <Button className="p-3 hover:shadow-md bg-white border-2 border-black rounded-xl font-semibold"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ?
+                            <FontAwesomeIcon className=" animate-spin" icon={faSpinner} />
+                        :"Checkout"}
                     </Button>                    
                 </div>
             </form>

@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 const getCart = () => {
     return axios.get('http://127.0.0.1:8000/cart/items/')
     .then(resp => resp.data)
@@ -13,10 +12,24 @@ const addToCart = (values) => {
         formData.append(key, values[key])
     }
 
-    return axios.post('http://127.0.0.1:8000/cart/items/',
-        formData,
-    { "Content-Type": "multipart/form-data"})
-    .then(resp => resp)
+    return axios({
+        method:'post', 
+        url: 'http://127.0.0.1:8000/cart/items/', 
+        data: formData,
+    })
+    .then(resp => {
+        return {
+            data: resp.data,
+            status: "success"
+        }
+    })
+    .catch(resp => {
+
+        return {
+            status: "error",
+            error: resp.response.data.error
+        }
+    })
 }
 
 export default getCart
