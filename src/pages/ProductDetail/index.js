@@ -26,10 +26,14 @@ const ProductDetail = () => {
     return (
         <div className="w-full flex flex-col">
             <ul className="p-0 m-0 flex text-md text-gray-600 pt-2 pb-2 mb-3">
-                <li className="border-r pr-2 pl-2 " >Footwear</li>
-                <li className="border-r pr-2 pl-2 " >Basas</li>
-                <li className="border-r pr-2 pl-2 " >High Top</li>
-                <li className="border-r pr-2 pl-2 " >Workaday</li>
+                {!loading &&
+                <>
+                    <li className="border-r pr-2 pl-2 " >Footwear</li>
+                    <li className="border-r pr-2 pl-2 " >Basas</li>
+                    <li className="border-r pr-2 pl-2 " >High Top</li>
+                    <li className="border-r pr-2 pl-2 " >Workaday</li>                    
+                </>}
+
             </ul>
             <div className="w-full flex flex-col gap-2 laptop:gap-0 laptop:grid laptop:grid-cols-[3fr_2fr]">
                 <div className="w-full h-fit">

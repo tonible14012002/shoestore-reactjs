@@ -23,7 +23,7 @@ const ProductForm = ({product}) => {
                 <span>{product.color.name || ""}</span>
             </div>
 
-            <div className="w-full transition-all">
+            <div className="w-full transition-all text-neutral-600">
                 <ReadMoreReadLess>
                     Chỉ đổi hàng 1 lần duy nhất, mong bạn cân nhắc kĩ trước khi quyết định.
                     Thời hạn đổi sản phẩm khi mua trực tiếp tại cửa hàng là 07 ngày, kể từ ngày mua. Đổi sản phẩm khi mua online là 14 ngày, kể từ ngày nhận hàng.
@@ -66,7 +66,6 @@ const Form = ({options, productId, genericProduct}) => {
 
     const quanityList = [...Array(15).keys()].map(i => i + 1)
     const handleFormikSubmit = (values) => {
-
         const submitForm = async () => {
             setIsSubmitting(true)
             const result = await addToCart(values)
@@ -80,6 +79,7 @@ const Form = ({options, productId, genericProduct}) => {
                     position: toast.POSITION.TOP_RIGHT
                 })
                 setCartData(result.data)
+                console.log(cartData)
             }
 
             setIsSubmitting(false)
@@ -110,7 +110,7 @@ const Form = ({options, productId, genericProduct}) => {
                 onSubmit={formikProps.handleSubmit}
             >   
                 <div className="mb-5">
-                    <span className="text-gray-500 font-semibold mb-3 block">Color pattern</span>
+                    <span className="text-neutral-600 font-semibold mb-3 block">Color pattern</span>
                     <div>
                         <ul className="w-[80%] m-0 p-0 flex flex-wrap gap-5  ">
                             {genericProduct.specific_products?.map((product, index) => {
@@ -127,10 +127,10 @@ const Form = ({options, productId, genericProduct}) => {
                     </div>
                 </div>
                 <div className="mb-5 min-h-[170px]">
-                    <span className="text-gray-500 font-semibold mb-3 block">Size options</span>
+                    <span className="text-neutral-600 font-semibold mb-3 block">Size options</span>
                     <div className="flex gap-2 mb-4">
                         <Button className={`transition-all w-fit font-semibold pl-5 pr-5 pt-2 pb-2 rounded-lg border 
-                                shadow-sm ${optionTabs[isActiveTab]==='size' ? "bg-black text-white":""}`}
+                                shadow-sm ${optionTabs[isActiveTab]==='size' ? "bg-neutral-800 text-white":""}`}
                             type="button"
                             onClick={handleSizeBtnClick}
                         >
@@ -138,7 +138,7 @@ const Form = ({options, productId, genericProduct}) => {
                         </Button>
 
                         <Button className={`transition-all w-fit font-semibold pl-5 pr-5 pt-2 pb-2 rounded-lg border 
-                                shadow-sm  ${optionTabs[isActiveTab]==='quantity' ? "bg-black text-white":""}`}
+                                shadow-sm  ${optionTabs[isActiveTab]==='quantity' ? "bg-neutral-800 text-white":""}`}
                             type="button"
                             onClick={handleQuantityBtnClick}
                         >
@@ -189,12 +189,12 @@ const Form = ({options, productId, genericProduct}) => {
                 </div>
 
                 <div className="mb-5 flex justify-between items-baseline">
-                    <span className="text-gray-500 font-semibold block">price:</span>
+                    <span className="text-neutral-600 font-semibold block">price:</span>
                     <span className="text-xl text-red-400 font-semibold">{price}</span>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-3">
-                    <Button className="p-3 hover:shadow-md bg-black rounded-xl text-white font-semibold"
+                    <Button className="p-3 hover:shadow-md bg-neutral-800 rounded-xl text-white font-semibold"
                         type="submit"
                         disabled={isSubmitting}
                     >   

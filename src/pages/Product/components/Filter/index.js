@@ -8,10 +8,9 @@ import * as productServices from "../../../../services/productServices";
 import { Formik, ErrorMessage, Field} from "formik";
 import FilterGroup from "./FilterGroup"
 import FilterChoiceSkeleton from "./FilterChoiceSkeleton"
-import FilterChoice from "./FilterChoice"
+import FormikCheckBox from "../../../../components/FormikCheckBox"
 import FilterMenuMobile from "./MobileFilter"
 import * as Yup from 'yup';
-
 const Filter = ({setNewQuery}) => {
 
     const categories = useRef()
@@ -91,8 +90,10 @@ const Filter = ({setNewQuery}) => {
             validationSchema={validationSchema}
         >
         {(formikProps) => {
+
             const hasError = Object.keys(formikProps.errors).length !== 0
             const formChanged = JSON.stringify(formikProps.values) !== JSON.stringify(formikProps.initialValues)
+
             return (
                 <form className="pl-3 pr-3 sticky z-30 top-0 bg-white mb-8"
                     onSubmit={formikProps.handleSubmit}
@@ -106,14 +107,14 @@ const Filter = ({setNewQuery}) => {
                             {!isLoading && 
                             <>
                                 <Button className="`transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
-                                    cursor-pointer bg-pink-300 hover:bg-pink-400 text-white rounded-3xl flex gap-1 items-center"
+                                    cursor-pointer bg-red-400 text-white rounded-xl flex gap-1 items-center"
                                     type="button"
                                     onClick={() => {formikProps.resetForm(); formikProps.handleSubmit()}}
                                 >
                                     <span>All</span><FontAwesomeIcon icon={faFilterCircleXmark} />
                                 </Button>
                                 {!isMobile && categories.current.map((item, index) => (
-                                <FilterChoice
+                                <FormikCheckBox
                                     primary
                                     key={item.id}
                                     label={item.name}
@@ -125,10 +126,10 @@ const Filter = ({setNewQuery}) => {
                             </>}
                         </div>
                         <Button className={`transition-all tablet:text-sm font-semibold pt-2 pb-2 pl-6 pr-6 
-                                cursor-pointer text-white rounded-3xl mr-2 
+                                cursor-pointer text-white rounded-xl mr-2 
                                 ${hasError?"bg-red-400 hover:bg-red-500"
-                                :formChanged? "bg-blue-400 hover:bg-blue-500"
-                                :"bg-gray-400"}`}
+                                :formChanged? "bg-red-400"
+                                :"bg-neutral-400 hover:bg-neutral-500"}`}
                                 type="submit"
                         >   
                             {hasError?
@@ -136,7 +137,7 @@ const Filter = ({setNewQuery}) => {
                             :<FontAwesomeIcon icon={faCheck} />}
                         </Button>
                         {!isLoading &&
-                        <Button className={`w-[50px] h-[50px] ${show&&"rotate-[10deg]"} ${hasError?"text-red-400":"text-blue-400"}`}
+                        <Button className={`w-[50px] h-[50px] ${show&&"rotate-[10deg]"} text-neutral-400`}
                             type="button"
                             onClick={handleClick}
                         >
@@ -167,7 +168,7 @@ const Filter = ({setNewQuery}) => {
 
 const FilterMenuLaptop = ({handleClose, options=[], ...props}) => {
     return (
-        <div className="absolute pt-3 pb-3 pl-5 pr-5 top-[70px] left-0 right-0 rounded-b-2xl bg-white shadow-md w-full">
+        <div className="absolute pt-3 pb-3 pl-5 pr-5 top-[70px] left-0 right-0 rounded-b-xl bg-white shadow-md w-full">
             <div className="grid grid-cols-2 laptop:grid-cols-3">
                 {options.map(item => {
                         return (
@@ -175,17 +176,17 @@ const FilterMenuLaptop = ({handleClose, options=[], ...props}) => {
                         )
                     })}
                 <div className="mb-4">
-                <h4 className="mb-3 text-xl tablet:text-base">Price range</h4>
+                <h4 className="mb-3 text-xl font-semibold tablet:text-base">Price range</h4>
                 <div className="w-full grid grid-cols-2 gap-3 mb-3">
                     <div className="">
-                        <Field className="w-full pl-3 pr-3 pt-2 pb-2 outline-none border rounded-2xl"
+                        <Field className="w-full pl-3 pr-3 pt-2 pb-2 outline-none border rounded-xl border-gray-400 shadow-md"
                             name="from" 
                             placeholder="From .... vnd"
                         />    
                         <span className="text-sm text-red-500"><ErrorMessage name="from" /></span>                    
                     </div>
                     <div className="">
-                        <Field className="w-full pl-3 pr-3 pt-2 pb-2 outline-none border rounded-2xl"
+                        <Field className="w-full pl-3 pr-3 pt-2 pb-2 outline-none border rounded-xl border-gray-400 shadow-md"
                             name="to" 
                             placeholder="To ... vnd"
                         />                        

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import { faBars, faX } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faEllipsis, faEllipsisVertical, faX } from "@fortawesome/free-solid-svg-icons"
 import Button from "../../../components/Button"
 import ReactDOM from "react-dom";
 import useModalDropdown from "../../../hooks/useModalDropdown";
@@ -18,13 +18,13 @@ const Menu = () => {
 
     return (<>
         <button className={`flex items-center pl-4 pr-4 pt-2 pb-2
-            rounded-2xl cursor-pointer ${show ? "bg-gray-300": "bg-gray-200 "} hover:bg-gray-300 transition-colors relative`}
+            rounded-2xl cursor-pointer transition-colors relative`}
             onClick={handleClick}
             ref={menuRef}
         >
             <span>
-                {show ? <FontAwesomeIcon className="text-gray-500" icon={faX} />
-                :<FontAwesomeIcon className="text-gray-500" icon={faBars} />}
+                {show ? <FontAwesomeIcon icon={faX} />
+                :<FontAwesomeIcon icon={faEllipsisVertical} />}
                 
             </span>
             <span className="ml-2">Menu</span>

@@ -41,13 +41,13 @@ const MiniCart = () => {
                 ${show && "translate-x-0"} `}
         >   
             <div className="relative w-full h-full bg-white rounded-bl-2xl shadow-md">
-                <Button className="absolute bg-gradient-to-b from-orange-500 to-yellow-500 right-[100%] justify-center
+                <Button className="absolute  bg-red-400 right-[100%] justify-center
                         flex flex-col items-center pl-3 pr-3 pt-3 pb-3 gap-1 rounded-tl-xl rounded-bl-xl text-lg text-white" 
                         type="button"
                         onClick={handleClick}
                     >
                         <FontAwesomeIcon icon={faCartShopping}/>
-                        <span>{cartData.items.length}</span>                           
+                        <span className="text-sm">{cartData.items.length}</span>                           
                 </Button>
 
                 <div className="w-[350px] p-2 h-full flex flex-col">
@@ -68,13 +68,13 @@ const MiniCart = () => {
                     </ul>
 
                     <div className="w-full p-2">
-                        <div className="flex justify-between">
+                        <div className="flex justify-between mb-1">
                             <h3 className="text-sm font-semibold">Total:</h3>
                             <span className="text-sm font-semibold text-red-400">{cartData.total_price}</span>
-                        </div>
-                        <Button className="w-full p-2 bg-orange-400 hover:bg-orange-500 transition-all 
+                        </div> 
+                        <Button className="block text-center w-full p-2 bg-red-400  transition-all 
                                 rounded-bl-xl rounded-br-xl text-white font-semibold hover:"
-
+                                to="/your-cart"
                         >
                             Checkout
                         </Button>                    

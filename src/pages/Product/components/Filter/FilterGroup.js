@@ -1,13 +1,13 @@
-import FilterChoice from "./FilterChoice"
+import FormikCheckBox from "../../../../components/FormikCheckBox"
 
 const FilterGroup = ({item, ...props}) => {
     return (
         <div className="mb-4">
-            <h4 className="mb-3 text-xl tablet:text-base">{item.name}</h4>
+            <h4 className="mb-3 text-xl font-semibold tablet:text-base">{item.name}</h4>
             <div className="flex flex-wrap gap-3">
                 {item.attributes.map(attr => {
                     return (
-                        <FilterChoice 
+                        <FormikCheckBox 
                             key={attr.id}
                             label={attr.name}
                             name={item.name}

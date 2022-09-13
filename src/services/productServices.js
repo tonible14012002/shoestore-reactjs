@@ -1,7 +1,5 @@
 import axios from "axios"
 
-
-
 const getCatgories = () => {
 
     return new Promise (resolve => {

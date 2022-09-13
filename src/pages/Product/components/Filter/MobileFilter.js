@@ -90,7 +90,7 @@ const FilterMenuMobile = ({
                                 placeholder="To ... vnd"
                             />
                         </div>
-                        <Button className={`${hasError? "bg-red-500":"bg-blue-400 hover:bg-blue-500"} w-full rounded-2xl transition-all
+                        <Button className={`${hasError? "bg-neutral-400":"bg-red-400"} w-full rounded-2xl transition-all
                         pl-3 pr-3 pt-2 pb-2 font-semibold text-xl text-white text-center`}
                             type="submit"
                         >
